@@ -19,6 +19,7 @@ import {
     View,
     Text,
     ImageBackground,
+    StyleSheet,
 } from 'react-native';
 import {API_KEY} from './api';
 
@@ -26,14 +27,6 @@ import DateLocation from './src/components/DateLocation';
 import Forecast from './src/components/Forecast';
 import Searchbar from './src/components/Searchbar';
 import Weather from './src/components/Weather';
-
-// import ClearUrl from './src/img/clear.jpg';
-// import CloudyUrl from './src/img/cloudy.jpg';
-// import DrizzleUrl from './src/img/drizzle.jpg';
-// import FogUrl from './src/img/fog.jpeg';
-// import RainUrl from './src/img/rain.jpg';
-// import SnowUrl from './src/img/snow.jpg';
-// import StormUrl from './src/img/storm.jpg';
 
 const App = () => {
     const mapImage = (id: number) => {
@@ -152,42 +145,52 @@ const App = () => {
         return <Text>Loading...</Text>;
     } else {
         return (
-            <SafeAreaView>
-                <StatusBar barStyle="dark-content" />
+            // <Fragment>
+            //     <SafeAreaView style={{flex: 0, background: 'transparent'}} />
+            //     <SafeAreaView style={{flex: 1, backgroundColor: 'blue'}}>
 
-                <ScrollView>
-                    <View>
-                        <ImageBackground
-                            source={mapImage(result.weather[0].id)}
-                            resizeMode="cover">
-                            <View>
-                                <Searchbar
-                                    placeholder="Search city"
-                                    onSubmit={onSubmit}
-                                />
-                            </View>
-
-                            <DateLocation
-                                city={result.name}
-                                country={result.sys.country}
-                                date={dayjs().format('dddd')}
+            <ScrollView>
+                <StatusBar barStyle="light-content" />
+                <ImageBackground
+                    source={mapImage(result.weather[0].id)}
+                    resizeMode="cover">
+                    <View style={styles.app}>
+                        <View>
+                            <Searchbar
+                                placeholder="Search city"
+                                onSubmit={onSubmit}
                             />
+                        </View>
 
-                            <Weather
-                                icon={result.weather[0].icon}
-                                condition={result.weather[0].main}
-                                temperature={Math.round(result.main.temp)}
-                                maxTemp={Math.round(result.main.temp_max)}
-                                minTemp={Math.round(result.main.temp_min)}
-                            />
+                        <DateLocation
+                            city={result.name}
+                            country={result.sys.country}
+                            date={dayjs().format('dddd')}
+                        />
 
-                            <Forecast weather={result} />
-                        </ImageBackground>
+                        <Weather
+                            icon={result.weather[0].icon}
+                            condition={result.weather[0].main}
+                            temperature={Math.round(result.main.temp)}
+                            maxTemp={Math.round(result.main.temp_max)}
+                            minTemp={Math.round(result.main.temp_min)}
+                        />
+
+                        <Forecast weather={result} />
                     </View>
-                </ScrollView>
-            </SafeAreaView>
+                </ImageBackground>
+            </ScrollView>
         );
     }
 };
+
+const styles = StyleSheet.create({
+    app: {
+        display: 'flex',
+        flexGrow: 2,
+        paddingTop: 70,
+        paddingBottom: 21,
+    },
+});
 
 export default App;
