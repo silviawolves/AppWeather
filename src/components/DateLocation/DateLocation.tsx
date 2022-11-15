@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
         alignItems: 'center',
-        padding: 30,
+        padding: 32,
     },
     location: {
         fontSize: 32,

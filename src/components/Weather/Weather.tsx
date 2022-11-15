@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     temperature: {
         fontSize: 80,
         color: 'white',
+        paddingBottom: 10,
     },
     rangeWrapper: {
         display: 'flex',

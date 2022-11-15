@@ -1,4 +1,4 @@
-import React, {useDebugValue} from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 
 import {useState, useEffect} from 'react';
@@ -9,7 +9,7 @@ interface Props {
     weather: any;
 }
 
-const Forecast2 = ({weather}: Props) => {
+const Forecast = ({weather}: Props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [forecast, setForecast] = useState({});
 
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Forecast2;
+export default Forecast;

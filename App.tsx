@@ -23,17 +23,42 @@ import {
 import {API_KEY} from './api';
 
 import DateLocation from './src/components/DateLocation';
-// import Forecast from './src/components/Forecast';
-import Forecast2 from './src/components/Forecast2';
+import Forecast from './src/components/Forecast';
 import Searchbar from './src/components/Searchbar';
 import Weather from './src/components/Weather';
 
+// import ClearUrl from './src/img/clear.jpg';
+// import CloudyUrl from './src/img/cloudy.jpg';
+// import DrizzleUrl from './src/img/drizzle.jpg';
+// import FogUrl from './src/img/fog.jpeg';
+// import RainUrl from './src/img/rain.jpg';
+// import SnowUrl from './src/img/snow.jpg';
+// import StormUrl from './src/img/storm.jpg';
+
 const App = () => {
-    const bgImage = {
-        uri: 'https://i.postimg.cc/QtsvYLvv/clear.jpg',
+    const mapImage = (id: number) => {
+        switch (true) {
+            case id >= 200 && id <= 232:
+                return require('./src/img/storm.jpg');
+            case id >= 300 && id <= 321:
+                return require('./src/img/drizzle.jpg');
+            case id >= 500 && id <= 531:
+                return require('./src/img/rain.jpg');
+            case id >= 600 && id <= 622:
+                return require('./src/img/snow.jpg');
+            case id >= 701 && id <= 781:
+                return require('./src/img/fog.jpeg');
+            case id >= 801 && id <= 804:
+                return require('./src/img/cloudy.jpg');
+            case id === 800:
+                return require('./src/img/clear.jpg');
+            default:
+                return require('./src/img/fog.jpeg');
+        }
     };
 
     type weatherItem = {
+        id: number;
         icon: any;
         main: string;
     };
@@ -62,7 +87,6 @@ const App = () => {
         }
     };
 
-    const [text, onChangeText] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
     const [city, setCity] = useState('Ottawa');
     const [result, setResult] = useState<result>({
@@ -81,6 +105,7 @@ const App = () => {
         },
         weather: [
             {
+                id: 0,
                 icon: '',
                 main: '',
             },
@@ -110,6 +135,7 @@ const App = () => {
                     },
                     weather: [
                         {
+                            id: data.weather[0].id,
                             icon: data.weather[0].icon,
                             main: data.weather[0].main,
                         },
@@ -122,8 +148,6 @@ const App = () => {
             });
     }, [city]);
 
-    console.log(text);
-
     if (!isLoaded) {
         return <Text>Loading...</Text>;
     } else {
@@ -133,7 +157,9 @@ const App = () => {
 
                 <ScrollView>
                     <View>
-                        <ImageBackground source={bgImage} resizeMode="cover">
+                        <ImageBackground
+                            source={mapImage(result.weather[0].id)}
+                            resizeMode="cover">
                             <View>
                                 <Searchbar
                                     placeholder="Search city"
@@ -155,8 +181,7 @@ const App = () => {
                                 minTemp={Math.round(result.main.temp_min)}
                             />
 
-                            {/* <Forecast data={result} /> */}
-                            <Forecast2 weather={result} />
+                            <Forecast weather={result} />
                         </ImageBackground>
                     </View>
                 </ScrollView>

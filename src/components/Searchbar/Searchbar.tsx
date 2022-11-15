@@ -26,8 +26,6 @@ const Searchbar: FunctionComponent<SearchInputProps> = ({
                 autoCorrect={false}
                 placeholder={placeholder}
                 placeholderTextColor="gray"
-                underlineColorAndroid="transparent"
-                clearButtonMode="always"
                 value={searchTerm}
                 onChangeText={setSearchTerm}
                 onSubmitEditing={handleSubmitEditing}
@@ -44,8 +42,9 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
     inputSearch: {
-        height: 40,
+        height: 35,
         width: '50%',
+        fontSize: 20,
         color: 'lightgray',
         borderBottomColor: 'lightgrey',
         borderBottomWidth: 1,
