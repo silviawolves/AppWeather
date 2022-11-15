@@ -13,7 +13,6 @@ import dayjs from 'dayjs';
 
 import {useState, useEffect} from 'react';
 import {
-    SafeAreaView,
     ScrollView,
     StatusBar,
     View,
@@ -145,10 +144,6 @@ const App = () => {
         return <Text>Loading...</Text>;
     } else {
         return (
-            // <Fragment>
-            //     <SafeAreaView style={{flex: 0, background: 'transparent'}} />
-            //     <SafeAreaView style={{flex: 1, backgroundColor: 'blue'}}>
-
             <ScrollView>
                 <StatusBar barStyle="light-content" />
                 <ImageBackground
