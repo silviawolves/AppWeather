@@ -3,70 +3,19 @@ import dayjs from 'dayjs';
 
 import {useState, useEffect} from 'react';
 import {API_KEY} from '../../../api';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 
-// type weatherItem = {
-//     icon: string;
-//     main: string;
-// };
+interface Props {
+    weather: any;
+}
 
-// type listItem = {
-//     dt: number;
-//     main: {
-//         temp_max: number;
-//         temp_min: number;
-//     };
-//     weather: weatherItem[];
-// };
-
-// type forecast = {
-//     list: listItem[];
-// };
-
-const Forecast = (props) => {
-    // const daily = (formatDay) => {
-    //     return forecast
-    //         .map(day => {
-    //             return {
-
-    //             }
-    //         })
-    // }
-
-    // const filterDays = (forecast) => {
-    //     const arrayFilter = [];
-    //         if(arrayFilter.contains(forecast.dt.value)){
-    //             return ''
-    //         }
-    //         else{
-    //             arrayFilter.push(forecast.dt.value)
-    //             return arrayFilter
-    //         }
-    // }
-
+const Forecast2 = ({weather}: Props) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [forecast, setForecast] = useState({});
-    // const [forecast, setForecast] = useState<forecast>({
-    //     list: [
-    //         {
-    //             dt: 0,
-    //             main: {
-    //                 temp_max: 0,
-    //                 temp_min: 0,
-    //             },
-    //             weather: [
-    //                 {
-    //                     main: '',
-    //                     icon: '',
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    // });
 
     useEffect(() => {
         fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${props.data.coord.lat}&lon=${props.data.coord.lon}&appid=${API_KEY}&units=metric`,
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${weather.coord.lat}&lon=${weather.coord.lon}&appid=${API_KEY}&units=metric`,
         )
             .then((response) => response.json())
             .then((data) => {
@@ -93,16 +42,26 @@ const Forecast = (props) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [props]);
+    }, [weather]);
 
-    // const day = Object.values(forecast).map((data, i) => {
-    //     const days = dayjs(data.dt * 1000).format('dddd');
-
-    //     // .filter(
-    //     //     (value, i, self) =>
-    //     //         i === self.findIndex((day) => day.dt === value.dt),
-    //     // );
-    // });
+    const day = (forecast: any) => {
+        Object.values(forecast).map((data: any) => {
+            const days = dayjs(data.dt * 1000).format('dddd');
+            const dayIcon = data.weather[0].icon;
+            const dayMaxTemp = data.main.temp_max;
+            const dayMinTemp = data.main.temp_min;
+            console.log(
+                Math.round(dayMaxTemp),
+                Math.round(dayMinTemp),
+                dayIcon,
+            );
+            console.log('weather ' + days);
+            // .filter(
+            //     (value, i, self) =>
+            //         i === self.findIndex((day) => day.dt === value.dt),
+            // );
+        });
+    };
 
     // const filteredDays = (day) => {
     //     return day.filter(
@@ -112,24 +71,14 @@ const Forecast = (props) => {
     // };
     // console.log(filteredDays());
 
-    const daily = (forecast) => {
-        let daysFormatted = [];
-
-        Object.values(forecast).map((data) => {
-            const days = dayjs(data.dt * 1000).format('dddd');
-            console.log(days);
-        });
-    };
-    // console.log(daily);
-
     if (!isLoaded) {
         return <Text>Loading...</Text>;
     } else {
         return (
-            <View style={styles.wrapper}>
+            <View style={{paddingLeft: 20, paddingRight: 20, paddingTop: 70}}>
                 {Object.values(forecast)
                     .slice(0, 5)
-                    .map((data, i) => {
+                    .map((data: any, i) => {
                         return (
                             <View style={styles.forecast} key={i}>
                                 <Text style={styles.daily}>
@@ -158,11 +107,6 @@ const Forecast = (props) => {
 };
 
 const styles = StyleSheet.create({
-    wrapper: {
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 70,
-    },
     forecast: {
         backgroundColor: 'rgba(255, 255, 255, .3)',
         display: 'flex',
@@ -193,4 +137,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Forecast;
+export default Forecast2;
