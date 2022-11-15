@@ -23,9 +23,10 @@ import {
 import {API_KEY} from './api';
 
 import DateLocation from './src/components/DateLocation';
-import Weather from './src/components/Weather';
-import Forecast from './src/components/Forecast';
+// import Forecast from './src/components/Forecast';
+import Forecast2 from './src/components/Forecast2';
 import Searchbar from './src/components/Searchbar';
+import Weather from './src/components/Weather';
 
 const App = () => {
     const bgImage = {
@@ -154,7 +155,8 @@ const App = () => {
                                 minTemp={Math.round(result.main.temp_min)}
                             />
 
-                            <Forecast data={result} />
+                            {/* <Forecast data={result} /> */}
+                            <Forecast2 weather={result} />
                         </ImageBackground>
                     </View>
                 </ScrollView>
