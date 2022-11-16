@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
         padding: 32,
     },
     location: {
-        fontSize: 32,
+        fontSize: 35,
         color: 'white',
-        paddingBottom: 10,
+        paddingBottom: 0,
     },
     date: {
         fontSize: 20,

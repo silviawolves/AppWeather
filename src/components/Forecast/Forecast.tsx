@@ -31,7 +31,9 @@ const Forecast = ({weather}: Props) => {
         return Object.values(forecast)
             .map((data: any) => {
                 return {
-                    days: dayjs(data.dt * 1000).format('dddd'),
+                    days: dayjs(data.dt * 1000)
+                        .add(1, 'day')
+                        .format('dddd'),
                     dayIcon: data.weather[0].icon,
                     dayMaxTemp: data.main.temp_max,
                     dayMinTemp: data.main.temp_min,
@@ -85,11 +87,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 10,
-        padding: 20,
+        padding: 10,
         marginBottom: 10,
     },
     daily: {
-        fontSize: 15,
+        fontSize: 17,
         flexBasis: '33%',
         color: 'white',
     },
@@ -98,10 +100,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     img: {
-        height: 30,
-        width: 30,
+        height: 50,
+        width: 50,
     },
     temperature: {
+        fontSize: 17,
         color: 'white',
         flexBasis: '33%',
         textAlign: 'right',

@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 10,
+        paddingTop: 2,
     },
     image: {
-        height: 50,
-        width: 50,
+        height: 60,
+        width: 60,
     },
     condition: {
-        fontSize: 20,
+        fontSize: 25,
         color: 'white',
         textTransform: 'uppercase',
         marginLeft: 20,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     temperature: {
         fontSize: 80,
         color: 'white',
-        paddingBottom: 10,
+        paddingBottom: 15,
     },
     rangeWrapper: {
         display: 'flex',
