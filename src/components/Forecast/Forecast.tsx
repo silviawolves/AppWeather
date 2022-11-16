@@ -2,8 +2,8 @@ import React from 'react';
 import dayjs from 'dayjs';
 
 import {useState, useEffect} from 'react';
-import {API_KEY} from '../../../api';
 import {Text, View, StyleSheet, Image} from 'react-native';
+import {API_KEY} from '../../../api';
 
 interface Props {
     weather: any;
